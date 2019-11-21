@@ -1,0 +1,63 @@
+select,input,button,option,textarea{
+    padding:.5em 1em;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+label{
+    font-size: 14px;
+}
+.button{
+    cursor: pointer;
+        background-color: #fff;
+        margin: 0 .5em;
+    &.default{
+        border: 1px solid #ccc;
+        &.active {
+            transform: scale(1.05);
+        }
+    }
+    &.cancel{
+        border: 1px solid #e71717;
+        color: #e71717;
+    }
+    &.primary{
+        border: 1px solid #238ef2;
+        color: #238ef2
+    }
+}
+.multi-add{
+    margin: .5em 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: .5em 1em;
+    .multi-add-option{
+        margin-right: .5em;
+        padding: 2px 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 3px;
+        font-size: 12px;
+        cursor: pointer;
+        vertical-align: middle;
+        &>button{
+            background-color: #fff;
+            padding: 0;
+            border: none;
+            &:focus{
+                outline: none;
+            }
+            i{
+                font-size: 10px;
+            }
+        }
+    }
+    input{
+        border: none;
+        padding: 0;
+        &:focus{
+            outline: none;
+        }
+    }
+}

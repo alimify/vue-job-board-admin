@@ -1,0 +1,146 @@
+.views{
+   
+    // min-height: 130px;
+    grid-column-gap: 1em;
+    height: 120px;
+    &>*{
+        background-color: #fff;
+        height: 100%;
+        overflow: hidden;
+        //  background-color: lighten($sidebar-bg, 70);
+         border-radius: 3px;
+         box-shadow: 0 0 5px lighten($sidebar-bg, 60);
+         &>*:last-child{
+            font-size: 12px;
+            padding: .6em 1rem;
+            text-align: center;
+            color: #ffffff;
+            background-color: $sidebar-bg;
+            a{color: inherit}
+         }
+    }
+    &#{_box}{
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        .title{
+            font-size: 14px;
+            margin-bottom: .5em;
+            font-weight: bold; 
+        }
+        .num{
+            font-size: 2em;
+            color: $fex-orange;
+            text-shadow: 0px 2px 7px lighten($sidebar-bg, 50);
+        }
+    }
+}
+.display{
+    grid-column-gap: 1em;
+    padding: 1em 0;
+    &>section{
+        background-color: darken(#fff,1);
+        padding:0 .5em;
+        border-radius: 3px;
+        position: relative;
+        .sec-header{
+            text-transform: uppercase;
+            &>span{
+                align-self: center;
+                justify-self: end;
+            }
+        }
+        &.will-scroll{
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        &>.quick-search {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            padding: 1em;
+            background-color: inherit;
+            display: flex;
+            justify-content: flex-end;
+            &>.quick-search-bar{
+                background-color: #fff;
+                padding: 0 6px;
+                border-radius: 3px;
+                box-shadow: 0 0 4px #ccc;
+                &>input{
+                    border: none;
+                    outline: none;
+                    padding: 6px 0;
+                }
+            }
+        }
+        [feed]{
+            padding:.5em;
+            padding-left: 0;
+            box-shadow: 0 0 1px lighten($sidebar-bg, 50);
+            margin-bottom: 1em;
+            background-color: #fff;
+            &>span{
+
+                &:first-child{
+                    flex-direction: column;
+                    position: relative;
+                    border-right:1px solid lighten($sidebar-bg, 60);
+                   
+                    &>a{
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        background-image: linear-gradient(orange, orangered);
+                    }
+                   &>p{
+                        font-size: 10px;
+                        text-align: center;
+                        b{
+                            font-size: 14px;
+                        }
+                    }
+                }
+                &:last-child{
+                      padding-left: .5em;  
+                    p:first-child{
+                        margin-top: 0;
+                        font-size: 14px;
+                        time{
+                            float: right;
+                            font-size: 11px;
+                        }
+                    }
+                    .tag{
+                        font-size: 11px;
+                        background-color: darken(#fff, 5);
+                        padding: .1em .5em;
+                        border-radius: 1pc;
+                    }
+                    h4{
+                        margin-top: 0;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        a{
+                            color: $fex-orange;
+                        }
+                        
+                    }
+                    .b_l{
+                        font-size: 12px;
+                        &>span{
+                            padding:.2em .5em;
+                            border: 1px solid lighten($fex-orange, 30);
+                            border-radius: 3pc;
+                            margin-right: 3px;
+                        }
+                    }
+                    detail{
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+}

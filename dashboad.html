@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard Fexjob</title>
+    <link rel="stylesheet" href="./dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./dist/css/material-icon.min.css">
+    <link rel="stylesheet" href="./dist/css/app.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div v-cloak="">
+            <nav class="f-navbar">
+                <div class="f-container f-nav-content">
+                    <a href="" class="logo">
+                        <img src="./dist/images/logo.png" alt="">
+                    </a>
+                    <!-- <div sidebar-toggler>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div> -->
+                    <div class="searchbar">
+                        <form action="">
+                            <div class="s-drop" @click="sDrop()">
+                                <i class="mdi mdi-search"></i>&nbsp;&nbsp;
+                                <i class="mdi mdi-chevron-down"></i>
+                                <div class="s-drop-content" v-show="tDrop">
+                                    <span class="active" @click="swap($event)">Professionals</span>
+                                    <span @click="swap($event)">Customers</span>
+                                </div>
+                            </div>
+                            <input type="search" :placeholder="searchType" id="nav-search">
+                        </form>
+                    </div>
+                    <div class="links">
+                        <a href="">Messages</a>
+                        <a href="">Log Out</a>
+                    </div>
+                </div>
+
+            </nav>
+            <div class="wrapper">
+                <aside sidebar v-linkactive>
+                    <a href="/dashboad.html">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="/transactions.html">
+                        <i class="mdi mdi-money-box"></i>
+                        <span>Transactions</span>
+                    </a>
+                    <a href="/customer.html">
+                        <i class="mdi mdi-accounts-outline"></i>
+                        <span>Customer</span>
+                    </a>
+                    <a href="/professional.html">
+                        <i class="mdi mdi-accounts-outline"></i>
+                        <span>Professionals</span>
+                    </a>
+                    <a href="/jobs.html">
+                        <i class="mdi mdi-case"></i>
+                        <span>Jobs</span>
+                    </a>
+                    <a href="/add-category.html">
+                        <i class="mdi mdi-badge-check"></i>
+                        <span>Add Category</span>
+                    </a>
+                    <a href="/add-skill.html">
+                        <i class="mdi mdi-badge-check"></i>
+                        <span>Add Skill</span>
+                    </a>
+                    <a href="/mail.html">
+                        <i class="mdi mdi-email"></i>
+                        <span>Mails</span>
+                    </a>
+                    <a href="/support-ticket.html">
+                        <i class="mdi mdi-markunread-mailbox"></i>
+                        <span>Support Ticket</span>
+                    </a>
+                </aside>
+                <main main>
+                    <div class="views" grid="4">
+                        <div>
+                            <div class="views_box">
+                                <span class="title">Open Jobs</span>
+                                <span class="num">30,000</span>
+                            </div>
+                            <div><a href="">View More</a></div>
+                        </div>
+                        <div>
+                            <div class="views_box">
+                                <span class="title">Active Contracts</span>
+                                <span class="num">100,000</span>
+                            </div>
+                            <div><a href="">View More</a></div>
+                        </div>
+                        <div>
+                            <div class="views_box">
+                                <span class="title">Total Customers</span>
+                                <span class="num">200,000</span>
+                            </div>
+                            <div><a href="">View More</a></div>
+                        </div>
+                        <div>
+                            <div class="views_box">
+                                <span class="title">Total Professionals</span>
+                                <span class="num">300,000</span>
+                            </div>
+                            <div><a href="">View More</a></div>
+                        </div>
+                    </div>
+
+                    <div class="display" grid="2">
+                       <section class="will-scroll">
+                           <header class="sec-header" grid="5">
+                                <h2 span="4">
+                                    Latest Job Post
+                                </h2>
+                                <span>
+                                    300
+                                </span>
+                           </header>
+                           <div class="quick-search">
+                               <div class="quick-search-bar"><input type="text"><span class="mdi mdi-search"></span></div>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>50</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4><a href="">Lorem ipsum dolor sit amet.</a></h4>
+                                    <p class="b_l"><span>Budget: $5000</span><span>Location: Pakistan</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur
+                                         adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>0</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4>
+                                        <a href="">Lorem ipsum dolor sit amet Lorem ipsum dolor, sit amet consectetur.</a>
+                                    </h4>
+                                    <p class="b_l"><span>Budget: $1000</span><span>Location: Nigeria</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>1</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4>
+                                        <a href="">Lorem ipsum dolor sit amet.</a>
+                                    </h4>
+                                    <p class="b_l"><span>Budget: $100</span><span>Location: Remote</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>50</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4><a href="">Lorem ipsum dolor sit amet.</a></h4>
+                                    <p class="b_l"><span>Budget: $5000</span><span>Location: Pakistan</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur
+                                         adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>0</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4>
+                                        <a href="">Lorem ipsum dolor sit amet Lorem ipsum dolor, sit amet consectetur.</a>
+                                    </h4>
+                                    <p class="b_l"><span>Budget: $1000</span><span>Location: Nigeria</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>1</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4>
+                                        <a href="">Lorem ipsum dolor sit amet.</a>
+                                    </h4>
+                                    <p class="b_l"><span>Budget: $100</span><span>Location: Remote</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>50</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4><a href="">Lorem ipsum dolor sit amet.</a></h4>
+                                    <p class="b_l"><span>Budget: $5000</span><span>Location: Pakistan</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur
+                                         adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>0</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4>
+                                        <a href="">Lorem ipsum dolor sit amet Lorem ipsum dolor, sit amet consectetur.</a>
+                                    </h4>
+                                    <p class="b_l"><span>Budget: $1000</span><span>Location: Nigeria</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Bids<br><b>1</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Akuma Isaac Akuma</a>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4>
+                                        <a href="">Lorem ipsum dolor sit amet.</a>
+                                    </h4>
+                                    <p class="b_l"><span>Budget: $100</span><span>Location: Remote</span></p>
+                                    <detail>
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam magni dignissimos voluptatem totam provident repellat.
+                                    </detail>
+                                </span>
+                            </div>
+                       </section>
+                       <section class="will-scroll">
+                            <header class="sec-header" grid="5">
+                                <h2 span="4">
+                                    Last Hired Job
+                                </h2>
+                                <span>
+                                    300
+                                </span>
+                           </header>
+                           <div class="quick-search">
+                               <div class="quick-search-bar"><input type="text"><span class="mdi mdi-search"></span></div>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Amount<br><b>$5000</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Aso James </a><small class="tag">client</small>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4><a href="">Lorem ipsum dolor sit amet.</a></h4>
+                                    <p><a href="">Abdul Alim </a><small class="tag">Professional</small></p>
+                                    <p class="b_l"><span>Milestone: $0</span></p>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Amount<br><b>$5000</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Emeka Promise </a><small class="tag">client</small>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4><a href="">Lorem ipsum dolor sit amet.</a></h4>
+                                    <p><a href="">Abdul Alim </a><small class="tag">Professional</small></p>
+                                    <p class="b_l"><span>Milestone: $0</span></p>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Amount<br><b>$5000</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Aso James </a><small class="tag">client</small>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4><a href="">Lorem ipsum dolor sit amet.</a></h4>
+                                    <p><a href="">Tariq Jamal </a><small class="tag">Professional</small></p>
+                                    <p class="b_l"><span>Milestone: $0</span></p>
+                                </span>
+                            </div>
+                            <div feed="" grid="6">
+                                <span class="xy-c">
+                                    <a href="" style=""></a>
+                                    <p>Amount<br><b>$5000</b></p>
+                                </span>
+                                <span span="5">
+                                    <p>
+                                        <a href="">Aso James </a><small class="tag">client</small>
+                                        <time>30mins ago</time>
+                                    </p>
+                                    <h4><a href="">Lorem ipsum dolor sit amet.</a></h4>
+                                    <p><a href="">Abdul Alim </a><small class="tag">Professional</small></p>
+                                    <p class="b_l"><span>Milestone: $0</span></p>
+                                </span>
+                            </div>
+                       </section>
+                    </div>
+                </main>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- <script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script> -->
+    <script src="./vue/vue.min.js"></script>
+    <script src="./dist/js/bundle.js"></script>
+    <script src="./dist/js/will-be-change.js"></script>
+</body>
+
+</html>
