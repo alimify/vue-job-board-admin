@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Fexjob</title>
+	<link rel="stylesheet" href="./dist/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./dist/css/material-icon.min.css">
+	<link rel="stylesheet" href="./dist/css/app.min.css">
+</head>
+<body>
+	<div id="app">
+		<div v-cloak="">
+			<nav class="f-navbar">
+				<div class="f-container f-nav-content">
+					<a href="" class="logo">
+						<img src="./dist/images/logo.png" alt="">
+					</a>
+					<!-- <div sidebar-toggler>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div> -->
+					<div class="searchbar">
+						<form action="">
+							<div class="s-drop" @click="sDrop()">
+								<i class="mdi mdi-search"></i>&nbsp;&nbsp;
+								<i class="mdi mdi-chevron-down"></i>
+								<div class="s-drop-content" v-show="tDrop">
+									<span class="active" @click="swap($event)">Professionals</span>
+									<span  @click="swap($event)">Customers</span>
+								</div>
+							</div>
+							<input type="search" :placeholder="searchType" id="nav-search">
+						</form>
+					</div>
+					<div class="links">
+						<a href="">Messages</a>
+						<a href="">Log Out</a>
+					</div>
+				</div>
+				
+			</nav>
+			<div class="wrapper">
+				<aside sidebar v-linkactive>
+					<a href="/dashboad.html"><i class="mdi mdi-view-dashboard"></i><span>Dashboard</span></a>
+					<a href="/transactions.html"><i class="mdi mdi-money-box"></i><span>Transactions</span></a>
+					<a href="/customer.html"><i class="mdi mdi-accounts-outline"></i><span>Customer</span></a>
+					<a href="/professional.html"><i class="mdi mdi-accounts-outline"></i><span>Professionals</span></a>
+					<a href="/jobs.html"><i class="mdi mdi-case"></i><span>Jobs</span></a>
+					<a href="/add-category.html">
+						<i class="mdi mdi-badge-check"></i>
+						<span>Add Category</span>
+					</a>
+					<a href="/add-skill.html">
+						<i class="mdi mdi-badge-check"></i>
+						<span>Add Skill</span>
+					</a>
+					<a href="/mail.html"><i class="mdi mdi-email"></i><span>Mails</span></a>
+					<a href="/support-ticket.html"><i class="mdi mdi-markunread-mailbox"></i><span>Support Ticket</span></a>
+				</aside>
+				<main main>
+					<header>
+						<div>
+							<a href="" style=""></a>
+						</div>
+						<div card>
+							<h2>Akuma Isaac</h2>
+							<div con>
+								<div about-one>
+									<div>
+										<span>Username: </span>
+										<span>Phone: </span>
+										<span>email: </span>
+										<span>Address: </span>
+										<span>City: </span>
+									</div>
+									<div>
+										<span>
+											<a href="">Akumxy</a>
+										</span>
+										<span>+2348036842046</span>
+										<span>some-email@excample.com</span>
+										<span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quam!</span>
+										<span>Port Harcourt</span>
+									</div>
+								</div>
+								<div about-one>
+									<div>
+										<span>Country: </span>
+									</div>
+									<div>
+										<span>Nigeria</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</header>
+
+					<div class="display flex">
+						<aside activity>
+							<div class="active">
+								<a href="" @click.prevent="pushTab('completedContracts',$event)">Complated Contracts</a>
+								<span>0</span>
+							</div>
+							<div>
+								<a href="" @click.prevent="pushTab('activeContracts',$event)">Active Contracts</a>
+								<span>0</span>
+							</div>
+							<div>
+								<a href="" @click.prevent="pushTab('jobInvitations',$event)">Job Invitations </a>
+								<span>0</span>
+							</div>
+							<div>
+								<a href="" @click.prevent="pushTab('canceledContracts',$event)">Canceled Contracts</a>
+								<span>0</span>
+							</div>
+							<div>
+								<a href="" @click.prevent="pushTab('clients',$event)">Clients</a>
+								<span>0 </span>
+							</div>
+							<div>
+								<a href="" @click.prevent="pushTab('payments',$event)">Job Payments</a>
+							</div>
+						</aside>
+						<main v-if="tab == 'completedContracts'">
+							<div card-list v-for="(cC,index) in completedContracts" :key="index">
+								<h5>
+									<a :href="cC.slug">{{ cC.title }}</a>
+									<span class="pull-right">Earned: {{ cC.earned }}</span>
+								</h5>
+								<p>
+									<b>Payment:</b> {{ cC.payment_type }}
+									<span class="s2">
+										<b>Agreed Price:</b> ${{ cC.agreed }}</span>
+								</p>
+								<p>
+									<b>Agreed Price:</b> ${{ cC.agreedPrice }}
+									<span class="s2">
+										<b>Commission:</b> ${{ cC.commission }}</span>
+								</p>
+								<p>
+									<b>Client:</b>
+									<a :href="cC.client.profileLink"> {{ cC.client.name }}</a>
+								</p>
+								<p>
+									<b>Completed On:</b> {{ cC.expired }}</p>
+							</div>
+						</main>
+						<main v-if="tab == 'activeContracts'">
+							<div card-list v-for="(activeContract,index) in activeContracts" :key="index">
+								<h5>
+									<a :href="activeContract.slug"> {{ activeContract.title }}</a>
+									<span class="pull-right">Earned: {{ activeContract.earned }}</span>
+								</h5>
+								<p>
+									<b>Payment:</b> {{ activeContract.payment_type }}</p>
+								<p>
+									<b>Agreed Price:</b> ${{ activeContract.agreedPrice }}
+									<span class="s2">
+										<b>Commission:</b> ${{ activeContract.commission }}</span>
+								</p>
+								<p>
+									<b>Client:</b>
+									<a :href="activeContract.client.profileLink"> {{ activeContract.client.name }}</a>
+								</p>
+								<p>
+									<b>Started On:</b> {{ activeContract.started_on }}
+									<span class="s2">
+										<b>Expiring On:</b> {{ activeContract.willEnd }}</span>
+								</p>
+							</div>
+						</main>
+						<main v-if="tab == 'jobInvitations'">
+							<div card-list v-for="(invite,index) in jobInvite" :key="index">
+								<h5>
+									<a :href="invite.slug">{{ invite.title }}</a>
+									<span class="pull-right">{{ invite.posted_at }}</span>
+								</h5>
+								<p>
+									<b>Payment:</b> {{ invite.payment_type }}</p>
+								<p>
+									<b>Budget:</b> ${{ invite.budget }}</p>
+								<p>{{ invite.descriptions }}</p>
+								<p>
+									<i class="fa fa-map-o"></i>
+									<b>{{ invite.location }}</b> {{ invite.duration }}
+									<span class="pull-right by">Posted by
+										<a href="">{{ invite.posted_by }}</a>
+									</span>
+								</p>
+							</div>
+						</main>
+						<main v-if="tab == 'clients'">
+							<div client>
+								<h5>
+									<a href="" class="client-icon">
+										<span style="">&nbsp;</span>
+										Name
+									</a>
+									<span class="pull-right">Earned: $60,000</span>
+								</h5>
+								<i class="fa-chevron-circle-down fa" accordion-toggle @click="toggleAccordion"></i>
+								<div jobs>
+									<ul>
+										<li>
+											<a href="">Lorem ipsum dolor sit amet.</a>
+											<span class="pull-right">
+												<b>Active</b>
+											</span>
+										</li>
+										<li>
+											<a href="">Cupiditate est iste vitae sint!</a>
+											<span class="pull-right">
+												<b>Canceled</b>
+											</span>
+										</li>
+										<li>
+											<a href="">Voluptatum nesciunt explicabo molestias esse!</a>
+											<span class="pull-right">
+												<b>Active</b>
+											</span>
+										</li>
+										<li>
+											<a href="">Perspiciatis minus error accusamus eaque?</a>
+											<span class="pull-right">
+												<b>Active</b>
+											</span>
+										</li>
+										<li>
+											<a href="">Praesentium pariatur deserunt nemo doloribus.</a>
+											<span class="pull-right">
+												<b>Achieved</b>
+											</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div client>
+								<h5>
+									<a href="" class="client-icon">
+										<span style="">&nbsp;</span>
+										Name
+									</a>
+									<span class="pull-right">Earned: $60,000</span>
+								</h5>
+								<i class="fa-chevron-circle-down fa" accordion-toggle @click="toggleAccordion"></i>
+								<div jobs>
+									<ul>
+										<li>
+											<a href="">Lorem ipsum dolor sit amet.</a>
+											<span class="pull-right">
+												<b>Active</b>
+											</span>
+										</li>
+										<li>
+											<a href="">Cupiditate est iste vitae sint!</a>
+											<span class="pull-right">
+												<b>Canceled</b>
+											</span>
+										</li>
+										<li>
+											<a href="">Voluptatum nesciunt explicabo molestias esse!</a>
+											<span class="pull-right">
+												<b>Active</b>
+											</span>
+										</li>
+										<li>
+											<a href="">Perspiciatis minus error accusamus eaque?</a>
+											<span class="pull-right">
+												<b>Active</b>
+											</span>
+										</li>
+										<li>
+											<a href="">Praesentium pariatur deserunt nemo doloribus.</a>
+											<span class="pull-right">
+												<b>Achieved</b>
+											</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</main>
+						<main v-if="tab == 'payments'">
+							<table>
+								<thead>
+									<tr>
+										<th>Lorem.</th>
+										<th>Voluptas!</th>
+										<th>Libero.</th>
+										<th>Ipsam.</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Lorem.</td>
+										<td>Quo?</td>
+										<td>Quis.</td>
+										<td>Assumenda?</td>
+									</tr>
+									<tr>
+										<td>Aspernatur?</td>
+										<td>Porro.</td>
+										<td>Non.</td>
+										<td>Voluptatibus?</td>
+									</tr>
+									<tr>
+										<td>Et.</td>
+										<td>Suscipit!</td>
+										<td>Eaque?</td>
+										<td>Labore!</td>
+									</tr>
+									<tr>
+										<td>Itaque?</td>
+										<td>Quaerat?</td>
+										<td>Recusandae!</td>
+										<td>Omnis.</td>
+									</tr>
+									<tr>
+										<td>Exercitationem!</td>
+										<td>Sequi.</td>
+										<td>Sapiente?</td>
+										<td>Repellendus.</td>
+									</tr>
+								</tbody>
+							</table>
+						</main>
+					</div>
+				</main>
+			</div>
+		</div>
+	</div>
+	<!-- <script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script> -->
+	<script src="./vue/vue.min.js"></script>
+	<script src="./dist/js/bundle.js"></script>
+	<script src="./dist/js/will-be-change.js"></script>
+</body>
+</html>

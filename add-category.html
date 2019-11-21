@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard Fexjob</title>
+    <link rel="stylesheet" href="./dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./dist/css/material-icon.min.css">
+    <link rel="stylesheet" href="./dist/css/app.min.css">
+</head>
+
+<body>
+    <div id="app-add-category">
+        <div v-cloak="">
+            <nav class="f-navbar">
+                <div class="f-container f-nav-content">
+                    <a href="" class="logo">
+                        <img src="./dist/images/logo.png" alt="">
+                    </a>
+                    <!-- <div sidebar-toggler>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div> -->
+                    <div class="searchbar">
+                        <form action="">
+                            <div class="s-drop" @click="sDrop()">
+                                <i class="mdi mdi-search"></i>&nbsp;&nbsp;
+                                <i class="mdi mdi-chevron-down"></i>
+                                <div class="s-drop-content" v-show="tDrop">
+                                    <span class="active" @click="swap($event)">Professionals</span>
+                                    <span @click="swap($event)">Customers</span>
+                                </div>
+                            </div>
+                            <input type="search" :placeholder="searchType" id="nav-search">
+                        </form>
+                    </div>
+                    <div class="links">
+                        <a href="">Messages</a>
+                        <a href="">Log Out</a>
+                    </div>
+                </div>
+
+            </nav>
+            <div class="wrapper">
+                <aside sidebar v-linkactive>
+                    <a href="/dashboad.html">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="/transactions.html">
+                        <i class="mdi mdi-money-box"></i>
+                        <span>Transactions</span>
+                    </a>
+                    <a href="/customer.html">
+                        <i class="mdi mdi-accounts-outline"></i>
+                        <span>Customer</span>
+                    </a>
+                    <a href="/professional.html">
+                        <i class="mdi mdi-accounts-outline"></i>
+                        <span>Professionals</span>
+                    </a>
+                    <a href="/jobs.html">
+                        <i class="mdi mdi-case"></i>
+                        <span>Jobs</span>
+                    </a>
+                    <a href="/add-category.html">
+                        <i class="mdi mdi-badge-check"></i>
+                        <span>Add Category</span>
+                    </a>
+                    <a href="/add-skill.html">
+                        <i class="mdi mdi-badge-check"></i>
+                        <span>Add Skill</span>
+                    </a>
+                    <a href="/mail.html">
+                        <i class="mdi mdi-email"></i>
+                        <span>Mails</span>
+                    </a>
+                    <a href="/support-ticket.html">
+                        <i class="mdi mdi-markunread-mailbox"></i>
+                        <span>Support Ticket</span>
+                    </a>
+                </aside>
+                <main main>
+                    <div class="display t">
+                        <div id="add-skill">
+                            <button class="button default" @click="modalAddSkills = true">Add New Category</button>
+                        </div>
+                        <div grid="12" class="top-action-bar">
+                            <div span="4" id="table-show">
+                                Show
+                                <select name="table-show" @change="updateShow">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                            <div span="8">
+                                <span id="table-search">
+                                    Search:
+                                    <input type="search">
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>
+                                            <input type="checkbox"  v-model="table.checkbox.all" @change="tableCheckBoxAll">
+                                        </th>
+                                        <th @click="sortTable('pro',$event)" 
+                                        aria-sort="ascending" class="sort">Category Name</th>
+                                        <th @click="sortTable('amount',$event)"
+                                         aria-sort="ascending" class="sort">Sub - Categories</th>
+                                        <th>Description</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(trans,index) in tableData" :key="index">
+                                        <td>{{index + 1}}</td>
+                                        <td><input type="checkbox" v-model="table.checkbox.checked['c'+index]" :name="'c'+index"></td>
+                                        <td :title="trans.pro"><a href="">{{trans.pro}}</a></td>
+                                        <td :title="trans.amount"><a href="">{{trans.amount}}</</a></td>
+                                        <td title="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis sed dignissimos iure velit explicabo corporis corrupti error quia vel nulla?</td>
+                                        <td :title="trans.action">{{trans.action}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bottom-action-bar" grid="12">
+                            <div span="4">
+                                Showing {{tableShowing.from}} to {{tableShowing.to}} of {{tableShowing.total}} entries
+                            </div>
+                            <div span="8" class="paginate-bar">
+                                <span>
+                                    <a href="" @click.prevent="backOrFront('back')">Prevous</a>
+                                    <a href="" 
+                                    v-for="(item,index) in pagIndexing" 
+                                    :key="item" 
+                                    @click.prevent="pagCheck($event)"
+                                    :data-info="JSON.stringify({'index':index+1,'value':item})"
+                                    :class="{ active: (item === table.pagination.now ) }"
+                                    >{{item+1}}</a>
+                                    <a href="" @click.prevent="backOrFront('front')">Next</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <div class="modal" v-show="modalAddSkills" @click.self="modalAddSkills = false">
+                <span class="modal-dismiss" @click="modalAddSkills = false">
+                    <i class="fa fa-times"></i>
+                </span>
+                <main class="modal_content _add-skills">
+                    <form @submit.prevent="newSkill">
+                        <div class="field">
+                            <label for="">Category Name:</label>
+                            <input type="text" v-model="form.skillName">
+                        </div>
+                        <div class="field">
+                            <label for="">Add to category:</label>
+                            <select name="" id="" v-model="form.category">
+                                <option value="" disabled>-------</option>
+                                <option value="">Lorem, ipsum.</option>
+                                <option value="">Reiciendis, molestiae.</option>
+                                <option value="">Dolorem, nostrum!</option>
+                                <option value="">Alias, voluptatum.</option>
+                            </select>
+                        </div>
+                        <div class="multi-add" @click.self="createFocus">
+                            <span v-for="(multi,i) in multiAdd.all" :key="i" @click="removeThis(multi)" class="multi-add-option">{{ multi}} 
+                                <button type="button" ><i class="fa fa-times"></i></button>
+                            </span>
+                            <input type="text" v-model="multiAdd.input" 
+                            @keypress.enter.prevent="pushNew"
+                            placeholder="Add Sub - Categories">
+                        </div>
+                        <div class="field">
+                            <textarea name="" id="" span="3" rows="10" placeholder="Description"></textarea>
+                        </div>
+                        <div class="flex end">
+                            <span style="flex:1" v-if="uploading" v-html="uploadRes"></span>
+                            <button type="button" class="button cancel" @click="modalAddSkills = false">Cancel</button>
+                            <button class="button primary">Save</button>
+                        </div>
+                    </form>
+                </main>
+            </div>
+        </div>
+    </div>
+    <!-- Uncomment the vue unpkg tag on production and delete the reletive one -->
+    <!-- <script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script> -->
+    <script src="./vue/vue.min.js"></script>
+    <script src="./dist/js/bundle.js"></script>
+    <script src="./dist/js/add-category.js"></script>
+</body>
+
+</html>

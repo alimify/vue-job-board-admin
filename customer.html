@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard Fexjob</title>
+    <link rel="stylesheet" href="./dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./dist/css/material-icon.min.css">
+    <link rel="stylesheet" href="./dist/css/datepicker.css">
+    <link rel="stylesheet" href="./dist/css/app.min.css">
+</head>
+
+<body>
+    <div id="app-transaction">
+        <div v-cloak="">
+            <nav class="f-navbar">
+                <div class="f-container f-nav-content">
+                    <a href="" class="logo">
+                        <img src="./dist/images/logo.png" alt="">
+                    </a>
+                    <div class="searchbar">
+                        <form action="">
+                            <div class="s-drop" @click="sDrop()">
+                                <i class="mdi mdi-search"></i>&nbsp;&nbsp;
+                                <i class="mdi mdi-chevron-down"></i>
+                                <div class="s-drop-content" v-show="tDrop">
+                                    <span class="active" @click="swap($event)">Professionals</span>
+                                    <span @click="swap($event)">Customers</span>
+                                </div>
+                            </div>
+                            <input type="search" :placeholder="searchType" id="nav-search">
+                        </form>
+                    </div>
+                    <div class="links">
+                        <a href="">Messages</a>
+                        <a href="">Log Out</a>
+                    </div>
+                </div>
+
+            </nav>
+            <div class="wrapper">
+                <aside sidebar v-linkactive>
+                    <a href="/dashboad.html">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="/transactions.html">
+                        <i class="mdi mdi-money-box"></i>
+                        <span>Transactions</span>
+                    </a>
+                    <a href="/customer.html">
+                        <i class="mdi mdi-accounts-outline"></i>
+                        <span>Customer</span>
+                    </a>
+                    <a href="/professional.html">
+                        <i class="mdi mdi-accounts-outline"></i>
+                        <span>Professionals</span>
+                    </a>
+                    <a href="/jobs.html">
+                        <i class="mdi mdi-case"></i>
+                        <span>Jobs</span>
+                    </a>
+                    <a href="/add-category.html">
+                        <i class="mdi mdi-badge-check"></i>
+                        <span>Add Category</span>
+                    </a>
+                    <a href="/add-skill.html">
+                        <i class="mdi mdi-badge-check"></i>
+                        <span>Add Skill</span>
+                    </a>
+                    <a href="/mail.html">
+                        <i class="mdi mdi-email"></i>
+                        <span>Mails</span>
+                    </a>
+                    <a href="/support-ticket.html">
+                        <i class="mdi mdi-markunread-mailbox"></i>
+                        <span>Support Ticket</span>
+                    </a>
+                </aside>
+                <main main>
+                    <div id="mile-bar" grid="5">
+                        <span class="mile-tab active">
+                            <a href="">All Customers</a>
+                        </span>
+                        <span class="mile-tab">
+                            <a href="">Active Customers</a>
+                        </span>
+                        <span class="mile-tab">
+                            <a href="">Temporary Suspended</a>
+                        </span>
+                        <span class="mile-tab">
+                            <a href="">Waiting to be Activated</a>
+                        </span>
+                        <span class="mile-tab">
+                            <a href="">Un-Active</a>
+                        </span>
+                    </div>
+                    <div class="display t">
+                        <div class="y-c" grid="8">
+                            <h3 span="7">Customers</h3>
+                            <span span="1" class="table-action">
+                                <i class="fa-print fa"></i>
+                                <i class="fa-ellipsis-v fa" v-dropdown="'drop-table-setting'" ak-dropdown></i>
+                            </span>
+                        </div>
+                        <div grid="12" class="top-action-bar">
+                            <div span="3" id="table-show">
+                                Show
+                                <select name="table-show" @change="updateShow">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                            <div grid="7" span="5" class="date-range">
+                                <span span="3">Date Range:</span>
+                                <span span="2">
+                                    <input type="text" v-model="date.from" placeholder="From" @click="datepick('from',$event)">
+                                </span>
+                                <span span="2">
+                                    <input type="text" v-model="date.to" placeholder="To" @click="datepick('to',$event)">
+                                </span>
+                            </div>
+                            <div span="4">
+                                <span id="table-search">
+                                    Search:
+                                    <input type="search">
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" v-model="table.checkbox.all" @change="tableCheckBoxAll">
+                                        </th>
+                                        <th @click="sortTable('pro',$event)" aria-sort="ascending" class="sort">Name</th>
+                                        <th @click="sortTable('client',$event)" aria-sort="ascending" class="sort">Tilte</th>
+                                        <th @click="sortTable('deposit',$event)" aria-sort="ascending" class="sort">Email</th>
+                                        <th @click="sortTable('amount',$event)" aria-sort="ascending" class="sort">Job Posts</th>
+                                        <th @click="sortTable('status',$event)" aria-sort="ascending" class="sort">Hired</th>
+                                        <th @click="sortTable('date',$event)" aria-sort="ascending" class="sort">Rating</th>
+                                        <th @click="sortTable('date',$event)" aria-sort="ascending" class="sort">Last Login</th>
+                                        <th @click="sortTable('date',$event)" aria-sort="ascending" class="sort">Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(trans,index) in tableData" :key="index">
+                                        <td>
+                                            <input type="checkbox" v-model="table.checkbox.checked['c'+index]" :name="'c'+index">
+                                        </td>
+                                        <td :title="trans.pro">{{trans.pro}}</td>
+                                        <td :title="trans.client">{{trans.client}}</td>
+                                        <td :title="trans.client">{{trans.client}}</td>
+                                        <td :title="trans.deposit">{{trans.deposit}}</td>
+                                        <td :title="trans.deposit">{{trans.deposit}}</td>
+                                        <td :title="trans.amount">{{trans.amount}}</td>
+                                        <td :title="trans.date">{{trans.date}}</td>
+                                        <td :title="trans.status">
+                                            <span class="tag" :class="tagsAddClass(trans.status)">{{trans.status}}</span>
+                                        </td>
+                                        <td title="trans.action">
+                                            <button type="button" class="t-action" ak-dropdown v-next-show>Open
+                                                <i class="fa-angle-down fa"></i>
+                                            </button>
+                                            <span class="t-action-dropdown" dropdown="drop-table-action">
+                                                <a href="">Edit</a>
+                                                <a href="">Delete</a>
+                                                <a href="/pro-profile.html">View</a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bottom-action-bar" grid="12">
+                            <div span="4">
+                                Showing {{tableShowing.from}} to {{tableShowing.to}} of {{tableShowing.total}} entries
+                            </div>
+                            <div span="8" class="paginate-bar">
+                                <span>
+                                    <a href="" @click.prevent="backOrFront('back')">Prevous</a>
+                                    <a href="" v-for="(item,index) in pagIndexing" :key="item" @click.prevent="pagCheck($event)" :data-info="JSON.stringify({'index':index+1,'value':item})"
+                                        :class="{ active: (item === table.pagination.now ) }">{{item+1}}</a>
+                                    <a href="" @click.prevent="backOrFront('front')">Next</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <span dropdown="drop-table-setting">
+                <a href="">Lorem, ipsum.</a>
+                <a href="">Ipsa, facilis?</a>
+                <a href="">Dolores, modi!</a>
+                <a href="">Aspernatur, sapiente.</a>
+            </span>
+
+        </div>
+    </div>
+    <!-- <script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script> -->
+    <script src="./vue/vue.min.js"></script>
+    <script src="./dist/js/bundle.js"></script>
+    <script src="./dist/js/customer.js"></script>
+</body>
+
+</html>

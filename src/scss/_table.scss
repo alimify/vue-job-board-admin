@@ -1,0 +1,161 @@
+.display.t{
+    background-color: #fff;
+    &>*:not(.table-container) {
+        padding: 0 2em;
+    }
+    #add-skill{
+        margin-bottom: 1em;
+    }
+    .top-action-bar{
+        
+
+       #table-search {
+            float: right;
+        }
+    }
+    .bottom-action-bar{
+       &>*:first-child{
+           font-size: 14px;
+       } 
+       .paginate-bar{
+
+        &>span{
+            float: right;
+            &>a{
+                padding: .6em 1em;
+                border: 1px solid #ccc;
+                font-size: 14px;
+                font-weight: 500px;
+                margin: 0 1px;
+
+                &.active{
+                    background-color: lighten($fex-orange,5);
+                    color: #fff;
+                    border-color: $fex-orange;
+                    cursor: default;
+                }
+                &:hover:not(.active) {
+                    background-color: darken(#fff, 5);
+                    color: $fex-orange;
+                }
+            }
+        }
+       }
+    }
+    .table-action{
+        display: flex;
+        justify-content: flex-end;
+        &>*{
+            padding: .5em .5em .5em 1em;
+            cursor: pointer;
+            &:last-child{
+                margin-left: .5em;
+            }
+        }
+    }
+}
+
+.table-container{
+    margin: 1em;
+    box-sizing: border-box;
+    overflow: auto;
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        .t-action {
+            background-color: #fff;
+        }
+        thead>tr{
+            margin-bottom: -2px;
+            th{
+               text-align: left;
+                position: relative;
+                font-size: 14px;
+                padding-right: 2em;
+                @mixin filter($a,$b){
+                    content: $a;
+                    position: absolute;
+                    font-family: 'FontAwesome';
+                    right: .5em;
+                    transform: translateY($b);
+                    color: #ccc;
+                }
+
+                &.sort {
+                    &::before {
+                        @include filter("\f106", -4px);
+                    }
+
+                    &::after {
+                        @include filter("\f107", 4px);
+                    }
+                }
+               
+                &.asc{
+                    &::before {
+                        color: $fex-orange;
+                    }
+                }
+                &.desc{
+                    &::after {
+                        color: $fex-orange;
+                    }
+                }
+                
+            }
+        }
+        tr{
+            border-bottom: 1px solid #020202;
+           
+            &>*{
+                padding:.5em 1em;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                border: 1px solid darken(#fff, 5);
+            }
+            td{
+                font-size: 14px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                max-width: 250px;
+                
+                
+            }
+            
+        }
+        tbody{
+            tr{
+                &:nth-child(odd) {
+                    background-color: darken(#fff, 1);
+                }
+            }
+        }
+    }
+}
+.date-range{
+    grid-column-gap: 1em;
+    align-items: center;
+    &>span:first-child{
+        text-align: right;
+    }
+    input{
+        width: 100%;
+    }
+}
+.tag{
+    border-radius: 3pc;
+    padding: .3em .5em;
+    color: #fff;
+    &.success{
+        background-color: rgb(12, 201, 12);
+        
+    }
+    &.error{
+        background-color: rgb(247, 25, 25);
+    }
+    &.info{
+        background-color: rgb(20, 112, 232);
+    }
+}

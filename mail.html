@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard Fexjob</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+    <link rel="stylesheet" href="./dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./dist/css/material-icon.min.css">
+    <link rel="stylesheet" href="./dist/css/datepicker.css">
+    <link rel="stylesheet" href="./dist/css/app.min.css">
+</head>
+
+<body>
+    <div id="app-mails">
+        <div v-cloak="">
+            <nav class="f-navbar">
+                <div class="f-container f-nav-content">
+                    <a href="" class="logo">
+                        <img src="./dist/images/logo.png" alt="">
+                    </a>
+                    <div class="searchbar">
+                        <form action="">
+                            <div class="s-drop" @click="sDrop()">
+                                <i class="mdi mdi-search"></i>&nbsp;&nbsp;
+                                <i class="mdi mdi-chevron-down"></i>
+                                <div class="s-drop-content" v-show="tDrop">
+                                    <span class="active" @click="swap($event)">Professionals</span>
+                                    <span @click="swap($event)">Customers</span>
+                                </div>
+                            </div>
+                            <input type="search" :placeholder="searchType" id="nav-search">
+                        </form>
+                    </div>
+                    <div class="links">
+                        <a href="">Messages</a>
+                        <a href="">Log Out</a>
+                    </div>
+                </div>
+
+            </nav>
+            <div class="wrapper">
+                <aside sidebar v-linkactive>
+                    <a href="/dashboad.html">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="/transactions.html">
+                        <i class="mdi mdi-money-box"></i>
+                        <span>Transactions</span>
+                    </a>
+                    <a href="/customer.html">
+                        <i class="mdi mdi-accounts-outline"></i>
+                        <span>Customer</span>
+                    </a>
+                    <a href="/professional.html">
+                        <i class="mdi mdi-accounts-outline"></i>
+                        <span>Professionals</span>
+                    </a>
+                    <a href="/jobs.html">
+                        <i class="mdi mdi-case"></i>
+                        <span>Jobs</span>
+                    </a>
+                    <a href="/add-category.html">
+                        <i class="mdi mdi-badge-check"></i>
+                        <span>Add Category</span>
+                    </a>
+                    <a href="/add-skill.html">
+                        <i class="mdi mdi-badge-check"></i>
+                        <span>Add Skill</span>
+                    </a>
+                    <a href="/mail.html">
+                        <i class="mdi mdi-email"></i>
+                        <span>Mails</span>
+                    </a>
+                    <a href="/support-ticket.html">
+                        <i class="mdi mdi-markunread-mailbox"></i>
+                        <span>Support Ticket</span>
+                    </a>
+                </aside>
+                <main main mail>
+                    <div id="mailMenu">
+                        <span class="compose" @click.prevent="display = 'compose'"><i class="fa fa-edit"></i><a href="">Compose</a></span>
+                        <span :class="cView('inbox')" @click.prevent="loadView('inbox',$event)">
+                            <i></i><a href="">Inbox</a> <span class="noti-tag">{{inbox}}</span>
+                        </span>
+                        <span  :class="cView('sent')" @click.prevent="loadView('sent',$event)">
+                            <i></i><a href="">Sent</a><span class="noti-tag">{{sent}}</span>
+                        </span>
+                        <span :class="cView('draft')" @click.prevent="loadView('draft',$event)">
+                            <i></i>
+                            <a href="">Draft</a>
+                            <span class="noti-tag">{{draft}}</span>
+                        </span>
+                        <span :class="cView('trash')" @click.prevent="loadView('trash',$event)">
+                            <i></i>
+                            <a href="">Trash</a>
+                            <span class="noti-tag">{{trash}}</span>
+                        </span>
+                        <span :class="cView('important')" @click.prevent="loadView('important',$event)">
+                            <i></i>
+                            <a href="">Important</a>
+                            <span class="noti-tag">{{important}}</span>
+                        </span>
+                    </div>
+                    <div class="mail-container" >
+                        <table v-if="display === 'mails'">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" name="" v-model="table.checkbox.all" @change="tableCheckBoxAll($event)"></th>
+                                    <th colspan="2">
+                                        <span class="button g-action"type="button">Action
+                                            <i class="fa-angle-down fa"></i>
+                                            <span class="dropDown">
+                                                <span>Delete</span>
+                                                <span>Move to trash</span>
+                                            </span>
+                                        </span>
+                                        
+                                        <select @change="updateRowLimit">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </th>
+                                    <th colspan="3">
+                                        <span>{{table.pag.from}}-{{table.pag.to}} of {{table.pag.of}}</span>
+                                        <button @click="move('back')" class="pag fa fa-angle-left"></button>
+                                        <button @click="move('front')" class="pag fa fa-angle-right"></button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               <tr v-for="email in emails" :key="email.id" :id="email.id" @click="readMail(email.id)">
+                                   <td class="w-20"><input type="checkbox" v-model="table.checkbox.checked[email.id]" :name="email.id" id="" ></td>
+                                   <td class="w-20">
+                                       <i class="fa fa-star" @click="makeImportant(email.id,$event)" :class="{active: email.category ===  'important'}"></i>
+                                    </td>
+                                   <td>{{email.name}}</td>
+                                   <td class="subject">{{email.subject}}</td>
+                                   <td class="w-20"><i class="fa-paperclip fa" v-if="email.file"></i></td>
+                                   <td>
+                                       <time>{{ format(email.date) }}</time>
+                                   </td>
+                               </tr>
+                            </tbody>
+                        </table>
+                        <section v-else-if="display === 'read'" read-mail>
+                            <div grid="12" top-bar>
+                                <div span="11">
+                                    <span class="subject">{{ reading.subject }}</span>
+                                </div>
+                                <div class="flex end" span="1"><span class="print"><i class="fa fa-print"></i></span></div>
+                            </div>
+                            <div>
+                                <div header>
+                                    <span> 
+                                        <strong>{{reading.name}}</strong> 
+                                        <small><{{reading.email}}></small> 
+                                        {{readDate(reading.date)}}
+                                        <span class="reply pull-right" @click="reply(reading.id)"><i class="fa-reply fa"></i></span>
+                                    </span> 
+                                </div>
+                            </div>
+                            <div content>
+                                {{reading.message}}
+                            </div>
+                        </section>
+                        <section compose v-else-if="display === 'compose'">
+                            <div></div>
+                            <div class="collect">
+                                <span>To:</span>
+                                <input type="text">
+                                <span>
+                                    <span class="link" v-show="!cc" @click="cc = true">Cc</span> 
+                                    <span class="link" v-show="!bcc" @click="bcc = true">Bcc</span>
+                                </span>
+                            </div>
+                            <div class="collect" v-show="cc">
+                                <span>Cc:</span>
+                                <input type="text">
+                                <span @click="cc = false" class="cancel mdi mdi-close"></span>
+                            </div>
+                            <div class="collect" v-show="bcc">
+                                <span>Bcc:</span>
+                                <input type="text">
+                                <span @click="bcc = false" class="cancel mdi mdi-close"></span>
+                            </div>
+                            <div class="collect">
+                                <span>Subject:</span>
+                                <input type="text">
+                            </div>
+                            <div id="editor-container">
+                                <form action="" >
+                                    <textarea name="" id="editor" v-model="editor"></textarea>
+                                    <div class="footer">
+                                        <button class="button" type="submit" @click.prevent="postMail($event)">Send</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </section>
+                    </div>
+                </main>
+            </div>
+            
+            <span dropdown="drop-table-setting">
+                <a href="">Lorem, ipsum.</a>
+                <a href="">Ipsa, facilis?</a>
+                <a href="">Dolores, modi!</a>
+                <a href="">Aspernatur, sapiente.</a>
+            </span>
+
+        </div>
+    </div>
+    <!-- <script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script> -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+    <script src="./vue/vue.min.js"></script>
+    <script src="./dist/js/bundle.js"></script>
+    <script src="./dist/js/mail.js"></script>
+    <script>
+        
+    </script>
+</body>
+
+</html>

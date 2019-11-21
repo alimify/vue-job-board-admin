@@ -1,0 +1,156 @@
+
+.f-navbar{
+    width: 100%;
+    padding: 0 1em;
+    background-color:#fff;
+    position: fixed;
+    border-bottom: 1px solid lighten($fex-orange,40);
+    z-index: 9;
+     %f {
+     	display: flex;
+     	justify-content: center;
+     	align-items: center;
+     }
+
+    .f-nav-content{
+        width: 100%;
+        height: fit-content;
+        max-height: 100px;
+        display: grid;
+        grid-template-columns: repeat(15,1fr);
+       &>*{
+            padding-top: .5em;
+            padding-bottom: .5em; 
+       }
+        .logo{
+            grid-column: span 2;
+            @extend %f;
+        }
+        .searchbar{
+            grid-column: span 5;
+            @extend %f;
+            form{
+                @extend %f;
+                width: 90%;
+                box-shadow: 0 0 4px #ccc;
+                background-color: #fff;
+                padding:.5em .5em .5em 0;
+                border-radius: 3px;
+                margin-left: auto;
+                .s-drop{
+                    width: 13%;
+                    position: relative;
+                    @extend %f;
+                    border-right: 1px solid #ece5d6;
+                    cursor: pointer;
+
+                    i{
+                        color: $fex-orange;
+                        
+                    }
+                    &>i:first-child{
+                        font-size: 20px !important;
+                    }
+                    &>div{
+                        position: absolute;
+                        width: fit-content;
+                        height: fit-content;
+                        top: 144%;
+                        background-color: #fff;
+                        left: 0;
+                        box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.05);
+                        border-radius: 3px;
+                        padding: .5em 0;
+
+                        &>span{
+                            padding:.5em 1em;
+                            display: block;
+                            white-space: nowrap;
+                            cursor: pointer;
+                            &:hover{
+                                background-color: darken(#fff,5)
+                            }
+                            &.active{
+                                color: $fex-orange;
+                                border-left: 2px solid $fex-orange;
+                            }
+                        }
+                    }
+                    &.active{
+                        &>div{
+                            display: block;
+                        }
+                    }
+                }
+                input{
+                    padding: 0 .5em;
+                    flex: 1;
+                    border: none;
+                    outline: none;
+                }
+            }
+
+        }
+        .links{
+            grid-column: span 7;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            color: #494949 !important;
+            &>*{
+                height: 100%;
+                text-transform: uppercase;
+                @extend %f;
+                padding:0 1em;
+                font-size: 14px;
+                .nav-btn{
+                    padding: .5em 1em;
+                    background-color: $fex-orange;
+                    text-transform: none;
+                    color: #fff;
+                    border-radius: 3px;
+                    box-shadow: 0 0 5px hsla(120, 4%, 81%, 0.867);
+                }
+                &:not(:last-child){
+                    &:hover,&.active{
+                       color: $fex-orange; 
+                    }
+                }
+            }
+        }
+    }
+    [sidebar-toggler]{
+        grid-column: span 1;
+        padding: .5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &>span{
+            display: block;
+            width: 20px;
+            height: 2px;
+            background-color: #494949;
+            &:not(:last-child){
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
+.fex-dropdown{
+    position: relative;
+
+    .fex-dropdown-content{
+        position: absolute;
+        left: 0;
+        top: 120%;
+        height: fit-content;
+        padding: .5em 0;
+        background-color: #fff;
+         box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.05);
+        .dropdown-list{
+            display: block;
+            min-width: 150px;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+@for $i from 1 through 12{
+    [grid="#{$i}"]{
+        width: 100%;
+        height: fit-content;
+        display: grid;
+        grid-template-columns: repeat($i,1fr);
+    }
+}
+@for $i from 1 through 12 {
+    [span="#{$i}"] {
+        grid-column: span $i;
+    }
+}
+.gap-1{ grid-gap: 1em}
+.xy-c{
+    justify-content: center;
+    align-items: center;
+}
+.x-c{
+    justify-content: center;
+}
+.y-c{
+    align-items: center;
+}
+.flex{
+    display: flex;
+    &.end{
+        justify-content: flex-end;
+    }
+}
