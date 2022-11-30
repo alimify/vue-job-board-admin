@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "animate.css": "^3.6.1",
+    "axios": "^0.17.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "faker": "^4.1.0",
+    "js-datepicker": "^2.3.0",
+    "lodash": "^4.17.5",
+    "moment": "^2.20.1",
+    "vue": "^2.5.13",
+    "webpack": "^3.11.0"
+  },
+  "name": "fexjob",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "webpack --config webpack.config.js"
+  }
+}
